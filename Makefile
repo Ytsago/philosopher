@@ -28,7 +28,7 @@ OBJDIR = .Obj/
 
 OBJS = $(FILE:%.c=$(OBJDIR)%.o)
 
-NAME = MY_PROG
+NAME = philosopher
 
 all: $(NAME)
 

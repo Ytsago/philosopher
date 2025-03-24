@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 16:18:31 by secros            #+#    #+#             */
-/*   Updated: 2025/03/24 17:22:04 by secros           ###   ########.fr       */
+/*   Updated: 2025/03/24 17:28:09 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,21 @@
 
 # include <stdlib.h>
 
-typedef struct s_sink
+/**
+ * @brief Node of chained list
+ * @param *content Pointer to an element
+ * @param (*f) Function to destroy this element (can be null)
+ * @param *next Pointer to next node
+ * 
+ */
+typdef struct s_sink	t_sink;
+
+struct s_sink
 {
 	void			*content;
 	void			(*f)(void *);
 	struct s_sink	*next;
-}	t_sink;
+};
 
 //utils
 /**

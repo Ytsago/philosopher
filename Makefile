@@ -10,15 +10,15 @@ AR = ar
 ARFLAG = -rcs
 MAKE := $(MAKE) -j
 
-FILE = main.c
+FILE = main.c parsing_utils.c bt_malloc.c bt_free.c
 
-INC = 
+INC = philosopher.h philo_struct.h
 
 INCDIR = inc/
 
-LIB_D = libft/
+# LIB_D = libft/
 
-LIB = $(LIB_D)libft.a
+# LIB = $(LIB_D)libft.a
 
 SRCDIR = src/
 
@@ -49,13 +49,13 @@ $(LIB): FORCE
 clean:
 	@echo "$(RED)Deleting object files...$(RESET)"
 	@rm -rf $(OBJDIR) && echo "$(GREEN)Done !$(RESET)"
-	@$(MAKE) $@ -C $(LIB_D) --no-print-directory
+	@# @$(MAKE) $@ -C $(LIB_D) --no-print-directory
 	
 
 fclean: clean
 	@echo "$(RED)Deleting executable or library $(NAME)...$(RESET)"
 	@rm -f $(NAME) && echo "$(GREEN)Done !$(RESET)"
-	@$(MAKE) $@ -C $(LIB_D) --no-print-directory
+	@# @$(MAKE) $@ -C $(LIB_D) --no-print-directory
 
 re: fclean all
 

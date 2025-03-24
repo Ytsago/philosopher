@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 16:18:31 by secros            #+#    #+#             */
-/*   Updated: 2025/03/24 17:28:09 by secros           ###   ########.fr       */
+/*   Updated: 2025/03/24 17:34:17 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
  * @param *next Pointer to next node
  * 
  */
-typdef struct s_sink	t_sink;
+typedef struct s_sink	t_sink;
 
 struct s_sink
 {

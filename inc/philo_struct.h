@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 14:24:48 by secros            #+#    #+#             */
-/*   Updated: 2025/03/26 11:43:46 by secros           ###   ########.fr       */
+/*   Updated: 2025/03/27 13:51:04 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,27 @@ typedef struct s_lock	t_lock;
  */
 typedef struct s_data	t_data;
 
+/**
+ * @brief Struct containing a mutex and boolean to represent the fork state
+ * @param fork a mutex for the current fork
+ * @param state a boolean for the fork state
+ */
+typedef struct s_fork	t_fork;
+
+typedef char t_bool;
+
+enum e_state
+{
+	FREE,
+	USED,
+};
+
+struct s_fork
+{
+	pthread_mutex_t	fork;
+	t_bool			state;
+};
+
 struct s_param
 {
 	unsigned int	t_die;
@@ -68,11 +89,12 @@ struct s_lock
 struct s_philo
 {
 	time_t			time;
+	t_bool			is_alive;
 	unsigned int	philo;
+	t_fork			l_fork;
 	t_param			*param;
 	t_lock			*lock;
-	pthread_mutex_t	r_fork;
-	pthread_mutex_t	*l_fork;
+	t_fork			*r_fork;
 };
 
 struct s_data

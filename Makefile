@@ -1,6 +1,6 @@
 # -----------RULES-----------#
 
-CFLAGS = -Wall -Wextra -Werror -MMD -MP
+CFLAGS = -Wall -Wextra -Werror -MMD -MP -g3
 CC = cc
 AR = ar
 ARFLAG = -rcs
@@ -10,6 +10,7 @@ ARFLAG = -rcs
 SRCDIR = src/
 UTIDIR = $(SRCDIR)utils/
 UPARSDIR = $(UTIDIR)parsing/
+ROUTDIR = $(SRCDIR)routine/
 INCDIR = inc/
 LIBDIR =
 OBJDIR = .Obj/
@@ -22,15 +23,18 @@ UTILS =	bt_malloc.c		bt_free.c
 
 PUTIL =	parsing_utils.c	
 
+ROUT =	init.c	routine.c
+
 INC =	bt_malloc.h 	philo_funct.h	philo_struc.h	philosopher.h
 
 # -----------SRCS-----------#
 
-SRC_MAIN = $(addprefix $(SRCDIR), $(MAIN))
-SRC_UTILS = $(addprefix $(UTIDIR), $(UTILS))
-SRC_PUTIL = $(addprefix $(UPARSDIR), $(PUTIL))
 
-SRCS = $(SRC_MAIN) $(SRC_UTILS) $(SRC_PUTIL)
+
+SRCS =	$(addprefix $(SRCDIR), $(MAIN)) \
+		$(addprefix $(UTIDIR), $(UTILS)) \
+		$(addprefix $(UPARSDIR), $(PUTIL)) \
+		$(addprefix $(ROUTDIR), $(ROUT)) \
 
 # -----------OTHER-----------#
 
@@ -46,7 +50,7 @@ NAME =	philo
 
 # -----------RULES-----------#
 
-all: $(NAME)
+all: $(NAME) Makefile
 
 $(NAME): $(LIBS) $(OBJS)
 	$(CC) $(CFLAG) $(OBJS) -o $(NAME) $(LIBS)

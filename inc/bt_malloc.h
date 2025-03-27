@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 16:18:31 by secros            #+#    #+#             */
-/*   Updated: 2025/03/24 17:34:17 by secros           ###   ########.fr       */
+/*   Updated: 2025/03/27 13:19:29 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,14 @@ void	*new_plate(size_t size, t_sink **bin);
  * @param head Sink pointer
  */
 void	remove_plate(void *pt, t_sink **head);
+
 /**
  * @brief Clear the sink by applaying each free_funct to content
  * 
  * @param head Sink head pointer
  */
 void	do_dishes(t_sink **head);
+
 /**
  * @brief apply free_funct to an element and remove it from sink.
  * 

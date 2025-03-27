@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 13:19:42 by secros            #+#    #+#             */
-/*   Updated: 2025/03/24 17:00:51 by secros           ###   ########.fr       */
+/*   Updated: 2025/03/26 14:23:13 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	assign_param(t_param *param, char **av)
 	if (av[5])
 		param->nb_to_eat = quick_atoi(av[5], &error);
 	else
-		param->nb_to_eat = 0;
+		param->nb_to_eat = -1;
 	return (error);
 }
 
@@ -64,15 +64,18 @@ void	philo_init(t_data *data)
 
 int	alloc_init(t_data *data)
 {
-	data->philo = new_plate((sizeof(t_philo) * data->param.nb_philo), get_sink(NULL));
+	data->philo = new_plate((sizeof(t_philo) * data->param.nb_philo), \
+	get_sink(NULL));
 	if (!data->philo)
 		return (1);
 	if (pthread_mutex_init(&data->lock.start, NULL) != 0)
 		return (1);
-	fill_dishwasher(&data->lock.start, (void (*)(void *))pthread_mutex_destroy, get_sink(NULL));
+	fill_dishwasher(&data->lock.start, (void (*)(void *))pthread_mutex_destroy, \
+	get_sink(NULL));
 	if (pthread_mutex_init(&data->lock.printing, NULL) != 0)
 		return (1);
-	fill_dishwasher(&data->lock.printing, (void (*)(void *))pthread_mutex_destroy, get_sink(NULL));
+	fill_dishwasher(&data->lock.printing, (void (*)(void *)) \
+	pthread_mutex_destroy, get_sink(NULL));
 	return (0);
 }
 
@@ -90,7 +93,8 @@ int	start(t_data *data)
 	while (nb_th < data->param.nb_philo)
 	{
 		data->philo[nb_th].philo = nb_th;
-		if(pthread_create(&th[nb_th], NULL, &routine, &data->philo[nb_th]) != 0)
+		if (pthread_create(&th[nb_th], NULL, &routine, \
+		&data->philo[nb_th]) != 0)
 			return (1);
 		nb_th++;
 	}

@@ -1,64 +1,83 @@
-GREEN  = \033[32m
-YELLOW = \033[33m
-BLUE   = \033[34m
-RED    = \033[31m
-RESET  = \033[0m
+# -----------RULES-----------#
 
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror -MMD -MP
 CC = cc
 AR = ar
 ARFLAG = -rcs
-MAKE := $(MAKE) -j
 
-FILE = main.c parsing_utils.c bt_malloc.c bt_free.c
-
-INC = philosopher.h philo_struct.h
-
-INCDIR = inc/
-
-# LIB_D = libft/
-
-# LIB = $(LIB_D)libft.a
+# -----------PATHS-----------#
 
 SRCDIR = src/
-
-SRCS = $(SRCS_D)$(FILE)
-
+UTIDIR = $(SRCDIR)utils/
+UPARSDIR = $(UTIDIR)parsing/
+INCDIR = inc/
+LIBDIR =
 OBJDIR = .Obj/
 
-OBJS = $(FILE:%.c=$(OBJDIR)%.o)
+# -----------FILES-----------#
 
-NAME = philosopher
+MAIN =	main.c
+
+UTILS =	bt_malloc.c		bt_free.c
+
+PUTIL =	parsing_utils.c	
+
+INC =	bt_malloc.h 	philo_funct.h	philo_struc.h	philosopher.h
+
+# -----------SRCS-----------#
+
+SRC_MAIN = $(addprefix $(SRCDIR), $(MAIN))
+SRC_UTILS = $(addprefix $(UTIDIR), $(UTILS))
+SRC_PUTIL = $(addprefix $(UPARSDIR), $(PUTIL))
+
+SRCS = $(SRC_MAIN) $(SRC_UTILS) $(SRC_PUTIL)
+
+# -----------OTHER-----------#
+
+OBJS =	$(patsubst $(SRCDIR)%.c, $(OBJDIR)%.o, $(SRCS))
+
+DEPS =	$(OBJS:.o=.d)
+
+HEADER = $(addprefix $(INCDIR), $(INC))
+
+LIBS =	
+
+NAME =	philo
+
+# -----------RULES-----------#
 
 all: $(NAME)
 
-$(NAME) : $(OBJS)
-	@echo "$(YELLOW)Creating final product : $(BLUE)$@...$(RESET)"
-	@$(CC) $(CFLAGS) $^ $(LIB) -o $@ && echo "$(GREEN)$@ Created successfully !$(RESET)"
+$(NAME): $(LIBS) $(OBJS)
+	$(CC) $(CFLAG) $(OBJS) -o $(NAME) $(LIBS)
 
-$(OBJDIR)%.o: $(SRCDIR)%.c $(LIB) | $(OBJDIR)
-	@echo "$(YELLOW)Compiling...$(RESET)"
-	$(CC) -c $(CFLAGS) -I $(LIB_D)$(INCDIR) $< -o $@
+$(OBJDIR)%.o: $(SRCDIR)%.c | $(OBJDIR)
+	$(CC) $(CFLAGS) -I $(INCDIR) $(if $(LIBS),-I $(LIBDIR)$(INCDIR)) -c $< -o $@ 
 
 $(OBJDIR):
-	@mkdir -p $(OBJDIR)
+	mkdir -p $(OBJDIR) $(dir $(OBJS))
 
-$(LIB): FORCE
-	@$(MAKE) -C $(LIB_D) --no-print-directory
+$(LIBS): FORCE
+	@$(MAKE) -C $(LIBDIR) --no-print-directory
+
+# -----------UTILS-----------#
 
 clean:
-	@echo "$(RED)Deleting object files...$(RESET)"
-	@rm -rf $(OBJDIR) && echo "$(GREEN)Done !$(RESET)"
-	@# @$(MAKE) $@ -C $(LIB_D) --no-print-directory
-	
+	rm -rf $(OBJDIR)
+ifneq ($(LIBS),)
+	@$(MAKE) $@ -C $(LIBDIR) 
+endif
 
 fclean: clean
-	@echo "$(RED)Deleting executable or library $(NAME)...$(RESET)"
-	@rm -f $(NAME) && echo "$(GREEN)Done !$(RESET)"
-	@# @$(MAKE) $@ -C $(LIB_D) --no-print-directory
+	rm -f $(NAME)
+ifneq ($(LIBS),)
+	@$(MAKE) $@ -C $(LIBDIR) 
+endif
 
 re: fclean all
 
 FORCE:
+
+-include $(DEPS)
 
 .PHONY: clean fclean re all bonus

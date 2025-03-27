@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 14:24:48 by secros            #+#    #+#             */
-/*   Updated: 2025/03/24 16:17:57 by secros           ###   ########.fr       */
+/*   Updated: 2025/03/26 11:43:46 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ struct s_param
 	unsigned int	t_sleep;
 	unsigned int	t_eat;
 	unsigned int	nb_philo;
-	unsigned int	nb_to_eat;
+	int				nb_to_eat;
 };
 
 struct s_lock

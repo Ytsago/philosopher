@@ -8,9 +8,15 @@ ARFLAG = -rcs
 # -----------PATHS-----------#
 
 SRCDIR = src/
+
 UTIDIR = $(SRCDIR)utils/
-UPARSDIR = $(UTIDIR)parsing/
 ROUTDIR = $(SRCDIR)routine/
+
+# UTILS SUBDIRECTORIES #
+UPARSDIR = $(UTIDIR)parsing/
+UALLOCDIR = $(UTIDIR)alloc/
+UTHDIR = $(UTIDIR)thread/
+
 INCDIR = inc/
 LIBDIR =
 OBJDIR = .Obj/
@@ -19,13 +25,17 @@ OBJDIR = .Obj/
 
 MAIN =	main.c
 
-UTILS =	bt_malloc.c		bt_free.c
+UTILS =
 
-PUTIL =	parsing_utils.c	
+PUTIL =		parsing_utils.c	
 
-ROUT =	init.c	routine.c
+ALUTIL =	bt_malloc.c		bt_free.c
 
-INC =	bt_malloc.h 	philo_funct.h	philo_struc.h	philosopher.h
+THUTIL =	thread_init.c	init.c
+
+ROUT =		routine.c
+
+INC =		bt_malloc.h 	philo_funct.h	philo_struc.h	philosopher.h
 
 # -----------SRCS-----------#
 
@@ -35,6 +45,9 @@ SRCS =	$(addprefix $(SRCDIR), $(MAIN)) \
 		$(addprefix $(UTIDIR), $(UTILS)) \
 		$(addprefix $(UPARSDIR), $(PUTIL)) \
 		$(addprefix $(ROUTDIR), $(ROUT)) \
+		$(addprefix $(UALLOCDIR), $(ALUTIL)) \
+		$(addprefix $(UTHDIR), $(THUTIL)) \
+
 
 # -----------OTHER-----------#
 

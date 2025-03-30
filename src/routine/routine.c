@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:52:32 by secros            #+#    #+#             */
-/*   Updated: 2025/03/27 12:56:41 by secros           ###   ########.fr       */
+/*   Updated: 2025/03/30 12:30:23 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,29 +30,21 @@ void	*routine(void *args)
 int	start(t_data *data)
 {
 	pthread_t	*th;
-	size_t		nb_th;
+	size_t		error;
 
-	nb_th = 0;
 	if (alloc_init(data))
 		return (1);
 	th = new_plate(sizeof(pthread_t) * data->param.nb_philo, get_sink(NULL));
+	if (!th)
+		return (1);
 	philo_init(data);
 	pthread_mutex_lock(&data->lock.start);
-	while (nb_th < data->param.nb_philo)
-	{
-		data->philo[nb_th].philo = nb_th + 1;
-		if (pthread_create(&th[nb_th], NULL, &routine, \
-		&data->philo[nb_th]) != 0)
-			return (1);
-		nb_th++;
-	}
-	nb_th = 0;
+	error = launch_thread(data, th);
+	if (error)
+		destroy_thread(data, th, error);
 	pthread_mutex_unlock(&data->lock.start);
-	while (nb_th < data->param.nb_philo)
-	{
-		pthread_join(th[nb_th], NULL);
-		nb_th++;
-	}
-	do_dishes(get_sink(NULL));
+	if (!fill_dishwasher(data->philo, free, get_sink(NULL)))
+		return (1);
+	destroy_thread(data, th, 0);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 14:24:48 by secros            #+#    #+#             */
-/*   Updated: 2025/03/27 13:51:04 by secros           ###   ########.fr       */
+/*   Updated: 2025/03/30 12:38:17 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct s_data	t_data;
  */
 typedef struct s_fork	t_fork;
 
-typedef char t_bool;
+typedef char			t_bool;
 
 enum e_state
 {
@@ -78,6 +78,7 @@ struct s_param
 	unsigned int	t_eat;
 	unsigned int	nb_philo;
 	int				nb_to_eat;
+	t_bool			dead;
 };
 
 struct s_lock
@@ -88,21 +89,21 @@ struct s_lock
 
 struct s_philo
 {
-	time_t			time;
-	t_bool			is_alive;
+	time_t			last_meal;
 	unsigned int	philo;
 	t_fork			l_fork;
 	t_param			*param;
 	t_lock			*lock;
 	t_fork			*r_fork;
+	int				eaten;
 };
 
 struct s_data
 {
-	t_param	param;
-	t_philo	*philo;
-	time_t	start;
-	t_lock	lock;
+	t_param		param;
+	t_philo		*philo;
+	time_t		start;
+	t_lock		lock;
 };
 
 #endif

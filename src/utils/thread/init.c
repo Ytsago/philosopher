@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/27 12:41:07 by secros            #+#    #+#             */
-/*   Updated: 2025/03/27 12:48:53 by secros           ###   ########.fr       */
+/*   Created: 2025/03/30 12:32:32 by secros            #+#    #+#             */
+/*   Updated: 2025/03/30 12:42:20 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	assign_param(t_param *param, char **av)
 	return (error);
 }
 
-void	philo_init(t_data *data)
+int	philo_init(t_data *data)
 {
 	size_t	nb;
 	size_t	i;
@@ -41,23 +41,24 @@ void	philo_init(t_data *data)
 		data->philo[i].lock = &data->lock;
 		data->philo[i].param = &data->param;
 		data->philo[i].r_fork = &data->philo[(i + 1) % nb].l_fork;
+		data->philo[i].eaten = 0;
+		data->philo[i].last_meal = 0;
+		data->philo[i].l_fork.state = 0;
+		if (new_mutex(&data->philo[i].l_fork.fork))
+			return (1);
 		i++;
 	}
+	return (0);
 }
 
 int	alloc_init(t_data *data)
 {
-	data->philo = new_plate((sizeof(t_philo) * data->param.nb_philo), \
-	get_sink(NULL));
+	data->philo = malloc((sizeof(t_philo) * data->param.nb_philo));
 	if (!data->philo)
 		return (1);
-	if (pthread_mutex_init(&data->lock.start, NULL) != 0)
+	if (new_mutex(&data->lock.start))
 		return (1);
-	fill_dishwasher(&data->lock.start, (void (*)(void *))pthread_mutex_destroy, \
-	get_sink(NULL));
-	if (pthread_mutex_init(&data->lock.printing, NULL) != 0)
+	if (new_mutex(&data->lock.printing))
 		return (1);
-	fill_dishwasher(&data->lock.printing, (void (*)(void *)) \
-	pthread_mutex_destroy, get_sink(NULL));
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 14:29:48 by secros            #+#    #+#             */
-/*   Updated: 2025/03/27 12:54:09 by secros           ###   ########.fr       */
+/*   Updated: 2025/03/30 12:38:25 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,36 @@ unsigned int	quick_atoi(char *str, char *error);
  * @return int --> Error is set to 1 in case of overflow or negative
  */
 int				assign_param(t_param *param, char **av);
-void			philo_init(t_data *data);
+int				philo_init(t_data *data);
 int				alloc_init(t_data *data);
 
 //-------ROUTINE---------//
-int	start(t_data *data);
-void	*routine(void *args);
+int				start(t_data *data);
+void			*routine(void *args);
+
+//-------THREAD---------//
+/**
+ * @brief Create each thread
+ * 
+ * @param data Struct --see philo_struct
+ * @param th pthread_t pointer to create the threads
+ * @return int [0 if success] [nb_of_thread if one fail]
+ */
+int				launch_thread(t_data *data, pthread_t *th);
+
+/**
+ * @brief Join each thread, if nb_th = 0 take the information from data->param
+ * 
+ * @param data Struct --see philo_struct
+ * @param th pthread_t pointer (one per thread)
+ * @param nb_th number of thread to join
+ */
+void			destroy_thread(t_data *data, pthread_t *th, size_t nb_th);
+
+/**
+ * @brief 
+ * 
+ */
+int				new_mutex(pthread_mutex_t *new);
 
 #endif

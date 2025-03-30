@@ -6,12 +6,11 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 12:32:32 by secros            #+#    #+#             */
-/*   Updated: 2025/03/30 13:00:24 by secros           ###   ########.fr       */
+/*   Updated: 2025/03/30 18:07:06 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
-#include "bt_malloc.h"
 
 int	assign_param(t_param *param, char **av)
 {
@@ -42,7 +41,6 @@ int	philo_init(t_data *data)
 		data->philo[i].param = &data->param;
 		data->philo[i].r_fork = &data->philo[(i + 1) % nb].l_fork;
 		data->philo[i].eaten = 0;
-		data->philo[i].last_meal = 0;
 		data->philo[i].l_fork.state = FREE;
 		if (new_mutex(&data->philo[i].l_fork.fork))
 			return (1);

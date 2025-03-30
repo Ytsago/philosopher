@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 14:24:48 by secros            #+#    #+#             */
-/*   Updated: 2025/03/30 15:33:10 by secros           ###   ########.fr       */
+/*   Updated: 2025/03/30 17:54:44 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <pthread.h>
+# include <sys/time.h>
 
 /**
  * @brief All information related to one philo
@@ -59,10 +60,18 @@ typedef struct s_fork	t_fork;
 
 typedef char			t_bool;
 
-enum e_state
+enum	e_state
 {
 	FREE,
 	USED,
+};
+
+enum	e_error
+{
+	AC = 1,
+	DIGIT,
+	VALUE,
+	START,
 };
 
 struct s_fork
@@ -78,6 +87,7 @@ struct s_param
 	unsigned int	t_eat;
 	unsigned int	nb_philo;
 	int				nb_to_eat;
+	struct timeval	start;
 	t_bool			dead;
 };
 
@@ -90,7 +100,7 @@ struct s_lock
 
 struct s_philo
 {
-	time_t			last_meal;
+	struct timeval	last_meal;
 	unsigned int	philo;
 	t_fork			l_fork;
 	t_param			*param;
@@ -101,10 +111,9 @@ struct s_philo
 
 struct s_data
 {
-	t_param		param;
-	t_philo		*philo;
-	time_t		start;
-	t_lock		lock;
+	t_param				param;
+	t_philo				*philo;
+	t_lock				lock;
 };
 
 #endif

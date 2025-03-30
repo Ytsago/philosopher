@@ -31,11 +31,11 @@ PUTIL =		parsing_utils.c
 
 ALUTIL =	bt_malloc.c		bt_free.c
 
-THUTIL =	thread_init.c	param_init.c
+THUTIL =	thread_init.c	param_init.c	check_philo.c
 
-ROUT =		routine.c
+ROUT =		routine.c		action.c 		fork.c
 
-INC =		bt_malloc.h 	philo_funct.h	philo_struc.h	philosopher.h
+INC =		bt_malloc.h 	philo_funct.h	philo_struc.h	philosopher.h	color.h
 
 # -----------SRCS-----------#
 

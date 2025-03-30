@@ -31,7 +31,7 @@ PUTIL =		parsing_utils.c
 
 ALUTIL =	bt_malloc.c		bt_free.c
 
-THUTIL =	thread_init.c	init.c
+THUTIL =	thread_init.c	param_init.c
 
 ROUT =		routine.c
 

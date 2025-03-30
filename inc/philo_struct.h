@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 14:24:48 by secros            #+#    #+#             */
-/*   Updated: 2025/03/30 12:38:17 by secros           ###   ########.fr       */
+/*   Updated: 2025/03/30 15:33:10 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ struct s_lock
 {
 	pthread_mutex_t	printing;
 	pthread_mutex_t	start;
+	pthread_mutex_t	is_alive;
 };
 
 struct s_philo

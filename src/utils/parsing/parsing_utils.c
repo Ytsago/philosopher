@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 14:25:37 by secros            #+#    #+#             */
-/*   Updated: 2025/03/27 11:45:51 by secros           ###   ########.fr       */
+/*   Updated: 2025/03/30 15:38:45 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_isdigit(int c)
 
 int	ft_issign(int c)
 {
-	if (c >= '-' || c <= '+')
+	if (c == '-' || c == '+')
 		return (1);
 	else
 		return (0);
@@ -43,7 +43,7 @@ int	all_digit(char *str)
 			return (0);
 		i++;
 	}
-	return (1);
+	return ((i != 0));
 }
 
 int	digit_len(char *str)

@@ -23,7 +23,7 @@ OBJDIR = .Obj/
 
 # -----------FILES-----------#
 
-MAIN =	main.c
+MAIN =		main.c
 
 UTILS =
 

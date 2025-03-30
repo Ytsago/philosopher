@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 12:32:32 by secros            #+#    #+#             */
-/*   Updated: 2025/03/30 18:07:06 by secros           ###   ########.fr       */
+/*   Updated: 2025/03/30 19:11:46 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	assign_param(t_param *param, char **av)
 		param->nb_to_eat = quick_atoi(av[5], &error);
 	else
 		param->nb_to_eat = -1;
+	param->dead = 0;
 	return (error);
 }
 
@@ -39,7 +40,10 @@ int	philo_init(t_data *data)
 	{
 		data->philo[i].lock = &data->lock;
 		data->philo[i].param = &data->param;
-		data->philo[i].r_fork = &data->philo[(i + 1) % nb].l_fork;
+		if (nb == 1)
+			data->philo[i].r_fork = NULL;
+		else
+			data->philo[i].r_fork = &data->philo[(i + 1) % nb].l_fork;
 		data->philo[i].eaten = 0;
 		data->philo[i].l_fork.state = FREE;
 		if (new_mutex(&data->philo[i].l_fork.fork))
@@ -57,6 +61,8 @@ int	alloc_init(t_data *data)
 	if (new_mutex(&data->lock.start))
 		return (1);
 	if (new_mutex(&data->lock.printing))
+		return (1);
+	if (new_mutex(&data->lock.is_alive))
 		return (1);
 	return (0);
 }

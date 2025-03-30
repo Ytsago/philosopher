@@ -6,11 +6,17 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:52:32 by secros            #+#    #+#             */
-/*   Updated: 2025/03/30 18:09:38 by secros           ###   ########.fr       */
+/*   Updated: 2025/03/30 18:53:19 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
+
+void	*wait_return(void)
+{
+	usleep(1000);
+	return (NULL);
+}
 
 void	*routine(void *args)
 {
@@ -23,21 +29,16 @@ void	*routine(void *args)
 	while (1)
 	{
 		if (is_a_philo_dead(philo))
-		{
-			usleep(1000);
-			return (NULL);
-		}
+			return(wait_return);
 		thinking(philo);
 		if (try_to_eat(philo))
-		{
-			usleep(1000);
-			return (NULL);
-		}
-		sleeping(philo);
+			return(wait_return);
+		if (sleeping(philo) != 0)
+			return(wait_return);
 	}
 	return (NULL);
 }
-
+	
 int	start(t_data *data)
 {
 	pthread_t	*th;

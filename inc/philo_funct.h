@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 14:29:48 by secros            #+#    #+#             */
-/*   Updated: 2025/03/30 18:12:01 by secros           ###   ########.fr       */
+/*   Updated: 2025/03/30 18:33:30 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,11 @@ int				all_digit(char *str);
 unsigned int	quick_atoi(char *str, char *error);
 //-------UTILS-ROUTINE--------//
 
-int			is_a_philo_dead(t_philo *philo);
-int			is_dead(t_philo *philo);
-void		philo_died(t_philo *philo);
-long long	get_delta(struct timeval start);
+int				is_a_philo_dead(t_philo *philo);
+int				is_dead(t_philo *philo);
+void			philo_died(t_philo *philo);
+long long		get_delta(struct timeval start);
+int				micro_sleep(t_philo *philo, size_t time_param);
 
 //-------INIT---------//
 /**
@@ -65,14 +66,14 @@ void			*routine(void *args);
 
 //-------FORK---------//
 
-int	check_fork(t_philo *philo);
-void	fork_unlock(t_philo *philo);
+int				check_fork(t_philo *philo);
+void			fork_unlock(t_philo *philo);
 
 //-------ACTION---------//
 
-int	sleeping(t_philo *philo);
-void	thinking(t_philo *philo);
-int	try_to_eat(t_philo *philo);
+int				sleeping(t_philo *philo);
+void			thinking(t_philo *philo);
+int				try_to_eat(t_philo *philo);
 
 //-------THREAD---------//
 /**

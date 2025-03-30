@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 18:09:13 by secros            #+#    #+#             */
-/*   Updated: 2025/03/30 18:09:36 by secros           ###   ########.fr       */
+/*   Updated: 2025/03/30 19:09:27 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	check_fork(t_philo *philo)
 
 	eating = 0;
 	pthread_mutex_lock(&philo->l_fork.fork);
-	if (philo->l_fork.state == FREE)
+	if (philo->r_fork && philo->l_fork.state == FREE)
 	{
 		pthread_mutex_lock(&philo->r_fork->fork);
 		if (philo->r_fork->state == FREE)

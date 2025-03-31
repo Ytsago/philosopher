@@ -6,11 +6,17 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 18:22:55 by secros            #+#    #+#             */
-/*   Updated: 2025/03/30 18:07:03 by secros           ###   ########.fr       */
+/*   Updated: 2025/03/31 01:31:41 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
+
+void	*wait_return(void)
+{
+	usleep(1000);
+	return (NULL);
+}
 
 int	new_mutex(pthread_mutex_t *new)
 {

@@ -29,13 +29,13 @@ UTILS =
 
 PUTIL =		parsing_utils.c	
 
-ALUTIL =	bt_malloc.c		bt_free.c
+ALUTIL =	bt_malloc.c			bt_free.c
 
-THUTIL =	thread_init.c	param_init.c	check_philo.c
+THUTIL =	thread_helpers.c	param_init.c	check_philo.c
 
-ROUT =		routine.c		action.c 		fork.c
+ROUT =		routine.c			action.c 		fork.c			monitoring.c
 
-INC =		bt_malloc.h 	philo_funct.h	philo_struc.h	philosopher.h	color.h
+INC =		bt_malloc.h 		philo_funct.h	philo_struc.h	philosopher.h	color.h
 
 # -----------SRCS-----------#
 

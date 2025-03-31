@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 14:29:48 by secros            #+#    #+#             */
-/*   Updated: 2025/03/30 18:33:30 by secros           ###   ########.fr       */
+/*   Updated: 2025/03/31 01:34:51 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int				is_dead(t_philo *philo);
 void			philo_died(t_philo *philo);
 long long		get_delta(struct timeval start);
 int				micro_sleep(t_philo *philo, size_t time_param);
+void			*wait_return(void);
 
 //-------INIT---------//
 /**
@@ -63,6 +64,7 @@ int				alloc_init(t_data *data);
 
 int				start(t_data *data);
 void			*routine(void *args);
+void			monitoring(t_data *data);
 
 //-------FORK---------//
 

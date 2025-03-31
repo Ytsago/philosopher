@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 18:06:08 by secros            #+#    #+#             */
-/*   Updated: 2025/03/30 19:14:27 by secros           ###   ########.fr       */
+/*   Updated: 2025/03/31 01:50:57 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ int	is_dead(t_philo *philo)
 {
 	long long	delta;
 
+	pthread_mutex_lock(&philo->update);
 	delta = get_delta(philo->last_meal);
+	pthread_mutex_unlock(&philo->update);
 	if (delta >= philo->param->t_die)
 	{
 		philo_died(philo);

@@ -6,17 +6,11 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:52:32 by secros            #+#    #+#             */
-/*   Updated: 2025/03/30 18:53:19 by secros           ###   ########.fr       */
+/*   Updated: 2025/03/31 01:59:17 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
-
-void	*wait_return(void)
-{
-	usleep(1000);
-	return (NULL);
-}
 
 void	*routine(void *args)
 {
@@ -25,31 +19,38 @@ void	*routine(void *args)
 	philo = args;
 	pthread_mutex_lock(&philo->lock->start);
 	pthread_mutex_unlock(&philo->lock->start);
-	gettimeofday(&philo->last_meal, NULL);
+	pthread_mutex_lock(&philo->update);
+	philo->last_meal = philo->param->start;
+	pthread_mutex_unlock(&philo->update);
 	while (1)
 	{
 		if (is_a_philo_dead(philo))
-			return(wait_return);
+			return (wait_return);
 		thinking(philo);
-		if (try_to_eat(philo))
-			return(wait_return);
-		if (sleeping(philo) != 0)
-			return(wait_return);
+		if (is_a_philo_dead(philo) || try_to_eat(philo))
+			return (wait_return);
+		usleep(300);
 	}
 	return (NULL);
 }
-	
+int	start_init(t_data *data, pthread_t **th)
+{
+	if (alloc_init(data))
+		return (1);
+	if (philo_init(data))
+		return (1);
+	*th = new_plate(sizeof(pthread_t) * data->param.nb_philo, get_sink(NULL));
+	if (!*th)
+		return (1);
+	return (0);
+}
+
 int	start(t_data *data)
 {
 	pthread_t	*th;
 	size_t		error;
 
-	if (alloc_init(data))
-		return (1);
-	th = new_plate(sizeof(pthread_t) * data->param.nb_philo, get_sink(NULL));
-	if (!th)
-		return (1);
-	if (philo_init(data))
+	if (start_init(data, &th))
 		return (1);
 	pthread_mutex_lock(&data->lock.start);
 	error = launch_thread(data, th);
@@ -62,9 +63,9 @@ int	start(t_data *data)
 	}
 	gettimeofday(&data->param.start, NULL);
 	pthread_mutex_unlock(&data->lock.start);
+	monitoring(data);
 	if (!fill_dishwasher(data->philo, free, get_sink(NULL)))
 		return (1);
-	usleep(10000000);
 	destroy_thread(data, th, 0);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 12:32:32 by secros            #+#    #+#             */
-/*   Updated: 2025/03/30 19:11:46 by secros           ###   ########.fr       */
+/*   Updated: 2025/03/31 01:50:35 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int	philo_init(t_data *data)
 		data->philo[i].eaten = 0;
 		data->philo[i].l_fork.state = FREE;
 		if (new_mutex(&data->philo[i].l_fork.fork))
+			return (1);
+		if (new_mutex(&data->philo[i].update))
 			return (1);
 		i++;
 	}

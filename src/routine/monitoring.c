@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 01:30:56 by secros            #+#    #+#             */
-/*   Updated: 2025/03/31 01:52:46 by secros           ###   ########.fr       */
+/*   Updated: 2025/03/31 10:02:12 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	monitoring(t_data *data)
 	size_t	nb;
 	size_t	count;
 
-	usleep(10000);
 	while (1)
 	{
 		nb = 0;

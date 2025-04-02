@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:52:32 by secros            #+#    #+#             */
-/*   Updated: 2025/03/31 01:59:17 by secros           ###   ########.fr       */
+/*   Updated: 2025/03/31 10:02:37 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@ void	*routine(void *args)
 	philo = args;
 	pthread_mutex_lock(&philo->lock->start);
 	pthread_mutex_unlock(&philo->lock->start);
-	pthread_mutex_lock(&philo->update);
-	philo->last_meal = philo->param->start;
-	pthread_mutex_unlock(&philo->update);
 	while (1)
 	{
 		if (is_a_philo_dead(philo))
@@ -45,6 +42,19 @@ int	start_init(t_data *data, pthread_t **th)
 	return (0);
 }
 
+void	assign_start_time(t_data *data)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < data->param.nb_philo)
+	{
+		data->philo[i].last_meal = data->param.start;
+		i++;
+	}
+	return ;
+}
+
 int	start(t_data *data)
 {
 	pthread_t	*th;
@@ -62,6 +72,7 @@ int	start(t_data *data)
 		return (1);
 	}
 	gettimeofday(&data->param.start, NULL);
+	assign_start_time(data);
 	pthread_mutex_unlock(&data->lock.start);
 	monitoring(data);
 	if (!fill_dishwasher(data->philo, free, get_sink(NULL)))

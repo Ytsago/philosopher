@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:52:32 by secros            #+#    #+#             */
-/*   Updated: 2025/04/09 17:24:55 by secros           ###   ########.fr       */
+/*   Updated: 2025/04/09 17:49:45 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ int	start(t_data *data)
 	size_t		error;
 	t_bool		time_error;
 
+	if (data->param.nb_philo == 0)
+		return (0);
 	if (start_init(data, &th))
 		return (1);
 	pthread_mutex_lock(&data->lock.start);

@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:52:32 by secros            #+#    #+#             */
-/*   Updated: 2025/04/09 16:20:44 by secros           ###   ########.fr       */
+/*   Updated: 2025/04/09 17:06:44 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ void	*routine(void *args)
 	while (1)
 	{
 		if (is_a_philo_dead(philo))
-			return (wait_return);
+			return (NULL);
 		printing(philo, THINK);
 		error = try_to_eat(philo);
 		if (error == 1)
-			return (wait_return);
+			return (NULL);
 		if (error == 2)
 		{
 			pthread_mutex_lock(&philo->lock->is_alive);
@@ -36,7 +36,7 @@ void	*routine(void *args)
 		}
 		sleeping(philo);
 	}
-	return (NULL);
+	return (philo);
 }
 
 int	start_init(t_data *data, pthread_t **th)
@@ -68,19 +68,20 @@ int	start(t_data *data)
 {
 	pthread_t	*th;
 	size_t		error;
+	t_bool		time_error;
 
 	if (start_init(data, &th))
 		return (1);
 	pthread_mutex_lock(&data->lock.start);
 	error = launch_thread(data, th);
-	if (error != 0)
+	time_error = gettimeofday(&data->param.start, NULL);
+	if (error != 0 || time_error)
 	{
 		data->param.dead = 1;
 		pthread_mutex_unlock(&data->lock.start);
 		destroy_thread(data, th, error);
 		return (1);
 	}
-	gettimeofday(&data->param.start, NULL);
 	assign_start_time(data);
 	pthread_mutex_unlock(&data->lock.start);
 	monitoring(data);

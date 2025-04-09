@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 18:06:08 by secros            #+#    #+#             */
-/*   Updated: 2025/03/31 01:50:57 by secros           ###   ########.fr       */
+/*   Updated: 2025/04/09 16:27:04 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,20 +59,5 @@ int	is_a_philo_dead(t_philo *philo)
 		return (1);
 	}
 	pthread_mutex_unlock(&philo->lock->is_alive);
-	return (0);
-}
-
-int	micro_sleep(t_philo *philo, size_t time_param)
-{
-	size_t	time;
-
-	time = 0;
-	while (time / 1000 < time_param)
-	{
-		if (is_a_philo_dead(philo) != 0 || is_dead(philo) != 0)
-			return (1);
-		usleep(SLEEP);
-		time += SLEEP;
-	}
 	return (0);
 }

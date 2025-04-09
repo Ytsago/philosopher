@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 18:08:29 by secros            #+#    #+#             */
-/*   Updated: 2025/04/09 16:25:40 by secros           ###   ########.fr       */
+/*   Updated: 2025/04/09 16:26:18 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ int	try_to_eat(t_philo *philo)
 			fork_unlock(philo);
 			break ;
 		}
-		usleep(300);
 	}
 	return (0);
 }

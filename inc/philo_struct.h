@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 14:24:48 by secros            #+#    #+#             */
-/*   Updated: 2025/03/31 01:50:25 by secros           ###   ########.fr       */
+/*   Updated: 2025/04/09 16:07:57 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,15 @@ enum	e_state
 {
 	FREE,
 	USED,
+};
+
+enum	e_action
+{
+	THINK,
+	FORK,
+	EAT,
+	SLEEP,
+	DIED,
 };
 
 enum	e_error

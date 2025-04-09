@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 14:29:31 by secros            #+#    #+#             */
-/*   Updated: 2025/03/30 19:25:03 by secros           ###   ########.fr       */
+/*   Updated: 2025/04/09 16:07:20 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@
 # include "color.h"
 # include "bt_malloc.h"
 
-# define SLEEP 20000
+// # define SLEEP 20000
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 14:29:48 by secros            #+#    #+#             */
-/*   Updated: 2025/03/31 01:34:51 by secros           ###   ########.fr       */
+/*   Updated: 2025/04/09 16:12:28 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ void			fork_unlock(t_philo *philo);
 //-------ACTION---------//
 
 int				sleeping(t_philo *philo);
-void			thinking(t_philo *philo);
 int				try_to_eat(t_philo *philo);
+void			printing(t_philo *philo, char action);
 
 //-------THREAD---------//
 /**

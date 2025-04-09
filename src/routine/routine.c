@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:52:32 by secros            #+#    #+#             */
-/*   Updated: 2025/03/31 10:02:37 by secros           ###   ########.fr       */
+/*   Updated: 2025/04/09 16:20:44 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	*routine(void *args)
 {
 	t_philo			*philo;
+	char			error;
 
 	philo = args;
 	pthread_mutex_lock(&philo->lock->start);
@@ -23,13 +24,21 @@ void	*routine(void *args)
 	{
 		if (is_a_philo_dead(philo))
 			return (wait_return);
-		thinking(philo);
-		if (is_a_philo_dead(philo) || try_to_eat(philo))
+		printing(philo, THINK);
+		error = try_to_eat(philo);
+		if (error == 1)
 			return (wait_return);
-		usleep(300);
+		if (error == 2)
+		{
+			pthread_mutex_lock(&philo->lock->is_alive);
+			philo->param->dead = 1;
+			pthread_mutex_unlock(&philo->lock->is_alive);
+		}
+		sleeping(philo);
 	}
 	return (NULL);
 }
+
 int	start_init(t_data *data, pthread_t **th)
 {
 	if (alloc_init(data))

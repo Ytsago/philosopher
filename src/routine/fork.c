@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 18:09:13 by secros            #+#    #+#             */
-/*   Updated: 2025/03/30 19:09:27 by secros           ###   ########.fr       */
+/*   Updated: 2025/04/09 16:11:26 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,7 @@ int	check_fork(t_philo *philo)
 		{
 			philo->l_fork.state = USED;
 			philo->r_fork->state = USED;
-			pthread_mutex_lock(&philo->lock->printing);
-			printf("%s%lld philo %d has taken a fork\n%s", FG_YELLOW, \
-				get_delta(philo->param->start), philo->philo, RESET);
-			printf("%s%lld philo %d has taken a fork\n%s", FG_YELLOW, \
-				get_delta(philo->param->start), philo->philo, RESET);
-			pthread_mutex_unlock(&philo->lock->printing);
+			printing(philo, FORK);
 			eating = 1;
 		}
 		pthread_mutex_unlock(&philo->r_fork->fork);

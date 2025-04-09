@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 01:30:56 by secros            #+#    #+#             */
-/*   Updated: 2025/04/09 16:25:03 by secros           ###   ########.fr       */
+/*   Updated: 2025/04/09 17:40:41 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,10 @@ void	monitoring(t_data *data)
 	size_t	nb;
 	size_t	count;
 
-	while (1)
+	while (!is_a_philo_dead(data->philo))
 	{
 		nb = 0;
 		count = 0;
-		if (is_a_philo_dead(data->philo))
-			return ;
 		while (nb < data->param.nb_philo)
 		{
 			if (is_dead(&data->philo[nb]))
@@ -50,5 +48,6 @@ void	monitoring(t_data *data)
 			pthread_mutex_unlock(&data->lock.is_alive);
 			return ;
 		}
+		usleep(300);
 	}
 }

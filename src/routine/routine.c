@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:52:32 by secros            #+#    #+#             */
-/*   Updated: 2025/04/09 17:06:44 by secros           ###   ########.fr       */
+/*   Updated: 2025/04/09 17:24:55 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,8 @@ void	*routine(void *args)
 	philo = args;
 	pthread_mutex_lock(&philo->lock->start);
 	pthread_mutex_unlock(&philo->lock->start);
-	while (1)
+	while (!is_a_philo_dead(philo))
 	{
-		if (is_a_philo_dead(philo))
-			return (NULL);
 		printing(philo, THINK);
 		error = try_to_eat(philo);
 		if (error == 1)

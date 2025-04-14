@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 14:29:48 by secros            #+#    #+#             */
-/*   Updated: 2025/04/14 16:30:02 by secros           ###   ########.fr       */
+/*   Updated: 2025/04/14 16:41:47 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,6 +238,14 @@ void			destroy_thread(t_data *data, pthread_t *th, size_t nb_th);
  */
 int				new_mutex(pthread_mutex_t *new);
 
+
+/**
+ * @brief Check if a philo has enough time to do his action without dying
+ * 
+ * @param philo 
+ * @param action 
+ * @return int 
+ */
 int				smart_sleep(t_philo *philo, int action);
 
 #endif

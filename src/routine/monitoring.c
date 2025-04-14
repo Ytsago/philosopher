@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 01:30:56 by secros            #+#    #+#             */
-/*   Updated: 2025/04/14 09:58:15 by secros           ###   ########.fr       */
+/*   Updated: 2025/04/14 10:04:25 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static t_bool	has_eaten_enough(t_philo *philo)
 {
 	int	nb_meal;
 
+	if (philo->param->nb_to_eat == -1)
+		return (0);
 	pthread_mutex_lock(&philo->update);
 	nb_meal = philo->eaten;
 	pthread_mutex_unlock(&philo->update);

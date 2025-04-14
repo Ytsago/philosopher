@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 13:19:42 by secros            #+#    #+#             */
-/*   Updated: 2025/03/30 18:07:08 by secros           ###   ########.fr       */
+/*   Updated: 2025/04/14 10:07:42 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 int	print_error(enum e_error type)
 {
 	if (type == AC)
-		write (2, "Error\nWrong arguement\n[nb_philo], [t_die], \
+		write (2, "Error\nWrong argument\n[nb_philo], [t_die], \
 [t_eat], [t_sleep], ([nb_to_eat])", 77);
 	if (type == DIGIT)
 		write (2, "Error\nParam can only contain numeric value", 43);
 	if (type == VALUE)
-		write (2, "Error\nNumber must be positive and size of (unsigned int)"\
-		, 57);
+		write (2, "Error\nNumbers must be positive and size of (unsigned int) \
+also philo can't exceed 10000", 88);
 	if (type == START)
 	{
 		write (2, "Error\nSomething went wrong\n", 28);

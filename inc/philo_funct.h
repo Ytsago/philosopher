@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 14:29:48 by secros            #+#    #+#             */
-/*   Updated: 2025/04/09 17:16:06 by secros           ###   ########.fr       */
+/*   Updated: 2025/04/14 09:47:16 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,11 +173,11 @@ void			monitoring(t_data *data);
 int				check_fork(t_philo *philo);
 
 /**
- * @brief Release the forks and make them usable
+ * @brief Release one fork and make it usable
  * 
- * @param philo The philo that release the forks
+ * @param fork The fork to release
  */
-void			fork_unlock(t_philo *philo);
+void			fork_unlock(t_fork *fork);
 
 //-------ACTION---------//
 

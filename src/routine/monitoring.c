@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 01:30:56 by secros            #+#    #+#             */
-/*   Updated: 2025/04/09 17:40:41 by secros           ###   ########.fr       */
+/*   Updated: 2025/04/14 09:58:15 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	monitoring(t_data *data)
 				count++;
 			nb++;
 		}
-		if (count == data->param.nb_philo - 1)
+		if (count == data->param.nb_philo)
 		{
 			pthread_mutex_lock(&data->lock.is_alive);
 			data->param.dead = 1;

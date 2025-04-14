@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 18:08:29 by secros            #+#    #+#             */
-/*   Updated: 2025/04/09 17:38:57 by secros           ###   ########.fr       */
+/*   Updated: 2025/04/14 09:45:55 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	try_to_eat(t_philo *philo)
 	{
 		if (is_a_philo_dead(philo))
 			return (1);
-		if (check_fork(philo))
+		if (check_fork(philo) == 3)
 		{
 			printing(philo, EAT);
 			pthread_mutex_lock(&philo->update);
@@ -66,7 +66,8 @@ int	try_to_eat(t_philo *philo)
 			philo->eaten++;
 			pthread_mutex_unlock(&philo->update);
 			usleep(philo->param->t_eat * 1000);
-			fork_unlock(philo);
+			fork_unlock(&philo->l_fork);
+			fork_unlock(philo->r_fork);
 			break ;
 		}
 		usleep(300);

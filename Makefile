@@ -1,6 +1,6 @@
 # -----------RULES-----------#
 
-CFLAGS = -Wall -Wextra -Werror -MMD -MP -pthread -g3
+CFLAGS = -Wall -Wextra -Werror -MMD -MP -pthread
 CC = cc
 AR = ar
 ARFLAG = -rcs

@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:52:32 by secros            #+#    #+#             */
-/*   Updated: 2025/04/09 17:49:45 by secros           ###   ########.fr       */
+/*   Updated: 2025/04/14 18:55:52 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	*routine(void *args)
 	philo = args;
 	pthread_mutex_lock(&philo->lock->start);
 	pthread_mutex_unlock(&philo->lock->start);
+	if (philo->philo % 2 == 0)
+		usleep(philo->param->t_eat * 500);
 	while (!is_a_philo_dead(philo))
 	{
 		printing(philo, THINK);
@@ -32,7 +34,8 @@ void	*routine(void *args)
 			philo->param->dead = 1;
 			pthread_mutex_unlock(&philo->lock->is_alive);
 		}
-		sleeping(philo);
+		if(sleeping(philo))
+			return (NULL);
 	}
 	return (philo);
 }
@@ -42,6 +45,11 @@ int	start_init(t_data *data, pthread_t **th)
 	if (alloc_init(data))
 		return (1);
 	if (philo_init(data))
+	{
+		free(data->philo);
+		return (1);
+	}
+	if (!fill_dishwasher(data->philo, free, get_sink(NULL)))
 		return (1);
 	*th = new_plate(sizeof(pthread_t) * data->param.nb_philo, get_sink(NULL));
 	if (!*th)
@@ -85,8 +93,6 @@ int	start(t_data *data)
 	assign_start_time(data);
 	pthread_mutex_unlock(&data->lock.start);
 	monitoring(data);
-	if (!fill_dishwasher(data->philo, free, get_sink(NULL)))
-		return (1);
 	destroy_thread(data, th, 0);
 	return (0);
 }

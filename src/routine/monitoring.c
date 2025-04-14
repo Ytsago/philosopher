@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 01:30:56 by secros            #+#    #+#             */
-/*   Updated: 2025/04/14 16:20:59 by secros           ###   ########.fr       */
+/*   Updated: 2025/04/14 18:36:53 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,6 @@ void	monitoring(t_data *data)
 			pthread_mutex_unlock(&data->lock.is_alive);
 			return ;
 		}
-		usleep(300);
+		usleep(1000);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 14:24:48 by secros            #+#    #+#             */
-/*   Updated: 2025/04/09 16:07:57 by secros           ###   ########.fr       */
+/*   Updated: 2025/04/15 09:16:48 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ struct s_philo
 	t_lock			*lock;
 	t_fork			*r_fork;
 	int				eaten;
+	t_bool			enough;
 	pthread_mutex_t	update;
 };
 

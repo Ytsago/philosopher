@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 12:32:32 by secros            #+#    #+#             */
-/*   Updated: 2025/04/14 18:49:28 by secros           ###   ########.fr       */
+/*   Updated: 2025/04/19 14:54:40 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	assign_param(t_param *param, char **av)
 
 	error = 0;
 	param->nb_philo = quick_atoi(av[1], &error);
-	if (param->nb_philo > 10000)
+	if (param->nb_philo > MAX_PHILO)
 		return (1);
 	param->t_die = quick_atoi(av[2], &error);
 	param->t_eat = quick_atoi(av[3], &error);

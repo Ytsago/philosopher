@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:52:32 by secros            #+#    #+#             */
-/*   Updated: 2025/04/14 18:55:52 by secros           ###   ########.fr       */
+/*   Updated: 2025/04/19 14:49:02 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*routine(void *args)
 	pthread_mutex_lock(&philo->lock->start);
 	pthread_mutex_unlock(&philo->lock->start);
 	if (philo->philo % 2 == 0)
-		usleep(philo->param->t_eat * 500);
+		usleep(2000);
 	while (!is_a_philo_dead(philo))
 	{
 		printing(philo, THINK);
@@ -34,7 +34,7 @@ void	*routine(void *args)
 			philo->param->dead = 1;
 			pthread_mutex_unlock(&philo->lock->is_alive);
 		}
-		if(sleeping(philo))
+		if (sleeping(philo))
 			return (NULL);
 	}
 	return (philo);

@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 18:08:29 by secros            #+#    #+#             */
-/*   Updated: 2025/04/15 10:45:54 by secros           ###   ########.fr       */
+/*   Updated: 2025/04/25 08:52:04 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,9 @@ int	sleeping(t_philo *philo)
 
 void	printing(t_philo *philo, char action)
 {
-	pthread_mutex_lock(&philo->lock->printing);
 	if (is_a_philo_dead(philo))
-	{
-		pthread_mutex_unlock(&philo->lock->printing);
 		return ;
-	}
+	pthread_mutex_lock(&philo->lock->printing);
 	if (action == THINK)
 		printf("%s%lld philo %d is thinking\n%s", FG_GREEN, \
 			get_delta(philo->param->start), philo->philo, RESET);

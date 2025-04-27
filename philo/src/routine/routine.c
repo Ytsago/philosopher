@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 12:52:32 by secros            #+#    #+#             */
-/*   Updated: 2025/04/19 14:49:02 by secros           ###   ########.fr       */
+/*   Updated: 2025/04/27 16:19:36 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ void	*routine(void *args)
 int	start_init(t_data *data, pthread_t **th)
 {
 	if (alloc_init(data))
+	{
+		free(data->philo);
 		return (1);
+	}
 	if (philo_init(data))
 	{
 		free(data->philo);

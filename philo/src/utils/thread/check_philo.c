@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 18:06:08 by secros            #+#    #+#             */
-/*   Updated: 2025/04/19 16:28:36 by secros           ###   ########.fr       */
+/*   Updated: 2025/04/27 16:15:26 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,19 @@
 long long	get_delta(struct timeval start)
 {
 	long long			delta;
+	struct timeval		d_start;
 	struct timeval		actual;
 
 	if (gettimeofday(&actual, NULL) != 0)
 		return (-1);
-	delta = ((actual.tv_sec * 1000) + (actual.tv_usec / 1000)) - \
-	((start.tv_sec * 1000) + (start.tv_usec / 1000));
+	d_start.tv_sec = actual.tv_sec - start.tv_sec;
+	d_start.tv_usec = actual.tv_usec - start.tv_usec;
+	if (d_start.tv_usec < 0)
+	{
+		d_start.tv_sec -= 1;
+		d_start.tv_usec += 1000000;
+	}
+	delta = d_start.tv_sec * 1000 + d_start.tv_usec / 1000;
 	return (delta);
 }
 

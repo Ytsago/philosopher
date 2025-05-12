@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 14:29:48 by secros            #+#    #+#             */
-/*   Updated: 2025/04/14 16:42:01 by secros           ###   ########.fr       */
+/*   Updated: 2025/05/12 13:41:06 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,6 +206,14 @@ int				try_to_eat(t_philo *philo);
  * @param action The message to print
  */
 void			printing(t_philo *philo, char action);
+
+/**
+ * @brief Print thinking and if there is an odd number of philo it wait time to eat
+ * 
+ * @param philo 
+ * @return int, [0] Success, [1] Error,
+ */
+int		thinking(t_philo *philo);
 
 //-------THREAD---------//
 /**

@@ -6,11 +6,19 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 18:08:29 by secros            #+#    #+#             */
-/*   Updated: 2025/05/12 10:55:40 by secros           ###   ########.fr       */
+/*   Updated: 2025/05/12 13:39:39 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
+
+int	thinking(t_philo *philo)
+{
+	printing(philo, THINK);
+	if (philo->param->nb_philo % 2 != 0)
+		return (smart_sleep(philo, EAT));
+	return (0);
+}
 
 int	sleeping(t_philo *philo)
 {

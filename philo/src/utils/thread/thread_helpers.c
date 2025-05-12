@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 18:22:55 by secros            #+#    #+#             */
-/*   Updated: 2025/04/14 18:42:11 by secros           ###   ########.fr       */
+/*   Updated: 2025/05/12 11:14:02 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ int	smart_sleep(t_philo *philo, int action)
 		if (philo->param->t_eat + philo->param->t_sleep > philo->param->t_die)
 			return (1);
 		usleep(philo->param->t_sleep * 1000);
+	}
+	if (action == 4)
+	{
+		if (philo->param->t_eat > philo->param->t_die)
+			return (1);
+		usleep((philo->param->t_eat * 500));
 	}
 	return (0);
 }

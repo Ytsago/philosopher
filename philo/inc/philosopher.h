@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 14:29:31 by secros            #+#    #+#             */
-/*   Updated: 2025/04/19 14:51:56 by secros           ###   ########.fr       */
+/*   Updated: 2025/05/12 10:54:21 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@
 # include "color.h"
 # include "bt_malloc.h"
 
-# define MAX_PHILO 200
+# define MAX_PHILO 1000
 
 #endif

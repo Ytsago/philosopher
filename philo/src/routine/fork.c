@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 18:09:13 by secros            #+#    #+#             */
-/*   Updated: 2025/04/25 08:51:09 by secros           ###   ########.fr       */
+/*   Updated: 2025/05/12 11:10:49 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,26 @@ int	check_one(t_fork *fork)
 
 int	check_fork(t_philo *philo)
 {
-	char	eating;
+	t_fork	*fork[2];
 
-	eating = check_one(&philo->l_fork);
-	eating += check_one(philo->r_fork) * 2;
-	if (eating == 0)
-		return (0);
-	else if (eating == 1)
-		fork_unlock(&philo->l_fork);
-	else if (eating == 2)
-		fork_unlock(philo->r_fork);
-	else
-		printing(philo, FORK);
-	return (eating);
+	fork[philo->philo % 2 == 0] = &philo->l_fork;
+	fork[philo->philo % 2 != 0] = philo->r_fork;
+	while (!check_one(fork[1]))
+	{
+		if (is_a_philo_dead(philo))
+			return (1);
+		usleep(500);
+	}
+	printing(philo, FORK);
+	while (!check_one(fork[0]))
+	{
+		if (is_a_philo_dead(philo))
+		{
+			fork_unlock(&philo->l_fork);
+			return (1);
+		}
+		usleep(500);
+	}
+	printing(philo, FORK);
+	return (0);
 }
